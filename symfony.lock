@@ -99,6 +99,9 @@
     "egulias/email-validator": {
         "version": "2.1.18"
     },
+    "erusev/parsedown": {
+        "version": "1.7.4"
+    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.41"
     },
@@ -111,8 +114,14 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.4"
     },
+    "mnapoli/front-yaml": {
+        "version": "1.7.0"
+    },
     "monolog/monolog": {
         "version": "2.1.0"
+    },
+    "nesbot/carbon": {
+        "version": "2.36.1"
     },
     "nikic/php-parser": {
         "version": "v4.6.0"
