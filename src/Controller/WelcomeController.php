@@ -37,13 +37,4 @@ class WelcomeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/blog", name="blog")
-     */
-    public function blog()
-    {
-        return $this->render('welcome/about.html.twig', [
-            'controller_name' => 'WelcomeController', 'page' => 'blog',
-        ]);
-    }
 }
