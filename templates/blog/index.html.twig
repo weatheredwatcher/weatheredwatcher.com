@@ -25,9 +25,8 @@
     <h1>
         {{ entry.title }}</a>
     </h1>
-{% apply markdown_to_html %}
- <p>{{ entry.content }}</p>
-{% endapply %}
+    {{ entry.content|markdown }}
+
 
    
 {% endfor %}

@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Blog;
 use App\Repository\BlogRepository;
+use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
+
 
 
 class BlogController extends AbstractController
