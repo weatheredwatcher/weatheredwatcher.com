@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Blog{% endblock %}
+
+{% block body %}
+    <h1>Update Blog</h1>
+
+    {{ include('blog/_form.html.twig', {'button_label': 'Submit'}) }}
+
+    <a href="{{ path('blog') }}">back to list</a>
+
+{% endblock %}

@@ -3,35 +3,87 @@
 {% block title %}Hello WelcomeController!{% endblock %}
 
 {% block body %}
-<style>   
+<style>
+    .pagination li { margin: 1em auto; }
     .example-wrapper { margin: 1em auto; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 }
+
+    .view {
+        background: url('{{ asset('img/clouds-scattered-over-a-snwowcapped-mountain.jpg') }}') no-repeat center center;
+        background-size: cover;
+    }
+    html,
+    body,
+    header,
+    .view {
+        height: 90%;
+    }
     
 </style>
+    <header>
 {{ include('welcome/_nav.html.twig') }}
- <!--Main layout-->
+
+    <div class="view intro-2">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light flex-center">
+                <div class="container text-center white-text">
+                    <div class="white-text text-center wow fadeInUp">
+                        <h2>This Navbar is fixed</h2>
+                        <h5>It will always stay visible on the top, even when you scroll down</h5>
+                        <br>
+                        <p>Full page intro with background image will be always displayed in full screen mode, regardless
+                            of device </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+    <!--Main layout-->
   <main class="mt-5 pt-4">
     <div class="container-lg">
-<div class="example-wrapper">
- <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h2 class="display-4">Fluid jumbotron</h2>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-  </div>
-</div>
-</div>
+
 {% for entry in entries %}
-    <h1>
-        {{ entry.title }}</a>
-    </h1>
+    <h1><a href="{{ entry.id }}">{{ entry.title }}</a></h1>
+    {% if is_granted('ROLE_ADMIN') %}
+
+        <a href="edit/{{ entry.id }}" class="nav-link"
+        <i class="fas fa-user mr-2"></i>Edit
+        </a>
+    </li>
+{% endif %}
+       <h2><i>{{ entry.created|date('m/d/Y') }}</i></h2>
     {{ entry.content|markdown }}
 
 
    
 {% endfor %}
-</div>
-</main>
+
+
+      {% if maxPages > 1 %}
+          <ul class="pagination pagination-sm">
+              {# `«` arrow  #}
+              <li {{ thisPage == 1 ? 'class="disabled"' }}>
+                  <a href="{{ path('blog', {page: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
+              </li>
+
+              {# Render each page number #}
+              {% for i in 1..maxPages %}
+                  <li {{ thisPage == i ? 'class="active"' }}>
+                      <a href="{{ path('blog', {page: i}) }}">{{ i }}</a>
+                  </li>
+              {% endfor %}
+
+              {# `»` arrow #}
+              <li {{ thisPage == maxPages ? 'class="disabled"' }}>
+                  <a href="{{ path('blog', {page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
+              </li>
+          </ul>
+      {% endif %}
+    </div>
+
+  </main>
 {% endblock %}
 
 {% block stylesheets %}

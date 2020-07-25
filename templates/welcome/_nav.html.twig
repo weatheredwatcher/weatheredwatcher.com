@@ -24,13 +24,13 @@
             </a>
           </li>
           <li class="nav-item {% if page == 'about' %}active{% endif %}">
-            <a class="nav-link" href="about">About</a>
+            <a class="nav-link" href="/about">About</a>
           </li>
           <li class="nav-item {% if page == 'projects' %}active{% endif %}">
-            <a class="nav-link" href="projects">Projects</a>
+            <a class="nav-link" href="/projects">Projects</a>
           </li>
           <li class="nav-item {% if page == 'blog' %}active{% endif %}">
-            <a class="nav-link" href="blog">Blog</a>
+            <a class="nav-link" href="/blog">Blog</a>
           </li>
         </ul>
 
@@ -39,37 +39,37 @@
 
 
           <li class="nav-item">
-            <a href="https://www.facebook.com/mdbootstrap" class="nav-link" target="_blank">
+            <a href="https://www.facebook.com/DugginsDavid" class="nav-link" target="_blank">
               <i class="fab fa-facebook-f"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://twitter.com/MDBootstrap" class="nav-link" target="_blank">
+            <a href="https://twitter.com/davidduggins" class="nav-link" target="_blank">
               <i class="fab fa-twitter"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link" target="_blank">
+            <a href="https://github.com/weatheredwatcher" class="nav-link" target="_blank">
               <i class="fab fa-github mr-2"></i>
             </a>
           </li>
           
           {% if is_granted('ROLE_USER') %}
           <li class="nav-item">
-            <a href="logout" class="nav-link border border-light rounded"
+            <a href="/logout" class="nav-link border border-light rounded"
               <i class="fas fa-user mr-2"></i>Logout
             </a>
           </li>
           {% else %}
            <li class="nav-item">
-            <a href="login" class="nav-link border border-light rounded"
+            <a href="/login" class="nav-link border border-light rounded"
               <i class="fas fa-user mr-2"></i>Login
             </a>
           </li>
           {% endif %}
           {% if is_granted('ROLE_ADMIN') %}
           <li class="nav-item {% if page == 'admin_main' %}active{% endif %}">
-            <a href="admin" class="nav-link"
+            <a href="/admin" class="nav-link"
               <i class="fas fa-user mr-2"></i>Adminland
             </a>
           </li>

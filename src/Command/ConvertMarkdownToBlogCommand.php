@@ -43,8 +43,8 @@ class ConvertMarkdownToBlogCommand extends Command
         $path = "/home/weatheredwatcher/Sites/weatheredwatcher.netlify.com/content/posts";
         $finder = new Finder();
         $parser = new Parser();
-        $finder->files()->in($path);
-        
+        $finder->files()->in($path)->sortByChangedTime();
+
         foreach ($finder as $file) {
             $title    = $file->getFilename();
             $contents = $file->getContents();

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Blog;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Blog|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +20,40 @@ class BlogRepository extends ServiceEntityRepository
         parent::__construct($registry, Blog::class);
     }
 
-    // /**
-    //  * @return Blog[] Returns an array of Blog objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllByDraft($isDraft)
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $entityManager = $this->getEntityManager();
 
-    /*
-    public function findOneBySomeField($value): ?Blog
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query = $entityManager->createQuery(
+            'SELECT b
+            FROM App\Entity\Blog b
+            WHERE b.is_draft = :draft
+            ORDER BY b.created ASC'
+        )->setParameter('draft', $isDraft);
+
+        // returns an array of Product objects
+        return $query->getResult();
+
     }
-    */
+
+    public function getAllPosts($currentPage=1)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->orderBy('p.created', 'DESC')
+            ->getQuery();
+
+        return $paginator = $this->paginate($query, $currentPage);
+    }
+
+    public function paginate($dql, $page = 1, $limit = 5)
+    {
+        $paginator = new Paginator($dql);
+
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1)) // Offset
+            ->setMaxResults($limit); // Limit
+
+        return $paginator;
+    }
+
 }
