@@ -68,6 +68,7 @@ class BlogController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $created = new Carbon("now");
             $blog->setCreated($created);
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($blog);
             $entityManager->flush();
@@ -103,11 +104,22 @@ class BlogController extends AbstractController
      */
     public function edit(Request $request, Blog $blog)
     {
-        $form = $this->createForm(BlogType::class, $blog);
+        $form = $this->createForm(BlogType::class, $blog, ['require_tags' => false, 'require_is_draft' => false]);
         $form->handleRequest($request);
 
-        return $this->render('blog/edit.html.twig', ['form' => $form->createView(), 'blog' => $blog, 'page' => 'blog']);
-    }
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $created = new Carbon("now");
+            
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($blog);
+            $entityManager->flush();
 
+            return $this->redirectToRoute('blog');
+        }
+    
+        return $this->render('blog/edit.html.twig', ['form' => $form->createView(), 'blog' => $blog, 'page' => 'blog']);
+    
+}
 
 }

@@ -53,6 +53,9 @@
         </a>
     </li>
 {% endif %}
+{% for tag in entry.tags %}
+<i>{{tag}},</i>
+{% endfor %}
        <h2><i>{{ entry.created|date('m/d/Y') }}</i></h2>
     {{ entry.content|markdown }}
 

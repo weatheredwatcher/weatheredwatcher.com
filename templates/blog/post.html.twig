@@ -19,6 +19,13 @@
                     <div class="container">
                         <h2 class="display-4">{{ blog.title }}</h2>
                         <p class="lead">{{ blog.created|date('m/d/Y')  }}</p>
+                        {% if is_granted('ROLE_ADMIN') %}
+
+        <a href="edit/{{ blog.id }}" class="nav-link"
+        <i class="fas fa-user mr-2"></i>Edit
+        </a>
+    </li>
+{% endif %}
                     </div>
                 </div>
             </div>
