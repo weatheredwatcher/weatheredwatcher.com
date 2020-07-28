@@ -18,8 +18,8 @@ class BlogType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('content', TextareaType::class)
-            ->add('is_draft', CheckboxType::class)
-            ->add('tags', TextType::class)
+            ->add('is_draft', CheckboxType::class, ['required' => false])
+            ->add('tags', TextType::class, ['required' => false])
         ;
 
         $builder->get('tags')

@@ -49,14 +49,16 @@
     {% if is_granted('ROLE_ADMIN') %}
 
         <a href="edit/{{ entry.id }}" class="nav-link"
-        <i class="fas fa-user mr-2"></i>Edit
+        <button class="btn btn-primary"><i class="fas fa-magic mr-1"></i> Edit</button>
         </a>
     </li>
 {% endif %}
+ 
+
 {% for tag in entry.tags %}
-<i>{{tag}},</i>
+     <span class="badge badge-light" style="margin-right: 10px;">{{ tag }}</span>
 {% endfor %}
-       <h2><i>{{ entry.created|date('m/d/Y') }}</i></h2>
+
     {{ entry.content|markdown }}
 
 

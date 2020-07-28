@@ -18,11 +18,14 @@
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
                         <h2 class="display-4">{{ blog.title }}</h2>
-                        <p class="lead">{{ blog.created|date('m/d/Y')  }}</p>
+                        
+                        {% for tag in blog.tags %}
+     <span class="badge badge-light">{{ tag }}</span>
+{% endfor %}
                         {% if is_granted('ROLE_ADMIN') %}
 
         <a href="edit/{{ blog.id }}" class="nav-link"
-        <i class="fas fa-user mr-2"></i>Edit
+        <button class="btn btn-primary"><i class="fas fa-magic mr-1"></i> Edit</button>
         </a>
     </li>
 {% endif %}
@@ -32,7 +35,7 @@
 
                    {{ blog.content|markdown }}
 
-
+<p>{{ blog.created|date('m/d/Y')  }}</p>
         </div>
 
     </main>
