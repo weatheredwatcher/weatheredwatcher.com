@@ -67,7 +67,8 @@ class BlogController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $created = new Carbon("now");
-            $blog->setCreated($created);
+            $blog->setCreatedAt($created);
+            $blog->setUpdatedAt($created);
             
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($blog);
