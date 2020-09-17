@@ -10,14 +10,16 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  */
 class Comment
 {
+
+    use TimestampableEntity;
+    
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
 
-    use TimestampableEntity;
-    
+
     private $id;
 
     /**

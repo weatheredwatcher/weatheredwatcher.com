@@ -7,11 +7,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+
 /**
  * @ORM\Entity(repositoryClass=BlogRepository::class)
  */
 class Blog
 {
+
+    use TimestampableEntity;
+
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -29,10 +35,6 @@ class Blog
      */
     private $content;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $created;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -44,6 +46,7 @@ class Blog
      */
     private $tags = [];
 
+
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="blog")
      */
@@ -52,6 +55,11 @@ class Blog
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getTitle(): ?string
@@ -78,17 +86,6 @@ class Blog
         return $this;
     }
 
-    public function getCreated(): ?\DateTimeInterface
-    {
-        return $this->created;
-    }
-
-    public function setCreated(\DateTimeInterface $created): self
-    {
-        $this->created = $created;
-
-        return $this;
-    }
 
     public function getIsDraft(): ?bool
     {

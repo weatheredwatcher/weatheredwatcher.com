@@ -39,7 +39,7 @@ class BlogRepository extends ServiceEntityRepository
     public function getAllPosts($currentPage=1)
     {
         $query = $this->createQueryBuilder('p')
-            ->orderBy('p.created', 'DESC')
+            ->orderBy('p.createdAt', 'DESC')
             ->getQuery();
 
         return $paginator = $this->paginate($query, $currentPage);
